@@ -73,11 +73,18 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 Nest is [MIT licensed](LICENSE).
 npm install husky lint-staged --save-dev
 npx husky-init && npm install
+
+"lint-staged": {
+"src/**/*.{js,ts,tsx}": [
+"npm run format"
+]
+},
+
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+npx lint-staged
 echo "Running Prettier..."
-npm run format
 PRETTIER_RESULT=$?
 if [ $PRETTIER_RESULT -ne 0 ]; then
 echo "Prettier failed. Aborting commit."
