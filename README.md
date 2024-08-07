@@ -71,7 +71,7 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
-npm install husky --save-dev
+npm install husky lint-staged --save-dev
 npx husky-init && npm install
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
