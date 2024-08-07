@@ -1,0 +1,29 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+npx lint-staged
+echo "Running Prettier..."
+PRETTIER_RESULT=$?
+if [ $PRETTIER_RESULT -ne 0 ]; then
+echo "Prettier failed. Aborting commit."
+exit 1
+fi
+
+echo "Running ESLint..."
+npm run lint
+ESLINT_RESULT=$?
+if [ $ESLINT_RESULT -ne 0 ]; then
+echo "ESLint failed. Aborting commit."
+exit 1
+fi
+
+echo "Running Tests..."
+npm run test
+JEST_RESULT=$?
+if [ $JEST_RESULT -ne 0 ]; then
+echo "Jest tests failed. Aborting commit."
+exit 1
+fi
+
+echo "All checks passed. Proceeding with commit."
+exit 0
