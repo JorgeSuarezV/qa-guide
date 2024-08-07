@@ -71,3 +71,34 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+npm install husky --save-dev
+npx husky-init && npm install
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "Running Prettier..."
+npm run format
+PRETTIER_RESULT=$?
+if [ $PRETTIER_RESULT -ne 0 ]; then
+echo "Prettier failed. Aborting commit."
+exit 1
+fi
+
+echo "Running ESLint..."
+npm run lint
+ESLINT_RESULT=$?
+if [ $ESLINT_RESULT -ne 0 ]; then
+echo "ESLint failed. Aborting commit."
+exit 1
+fi
+
+echo "Running Tests..."
+npm run test
+JEST_RESULT=$?
+if [ $JEST_RESULT -ne 0 ]; then
+echo "Jest tests failed. Aborting commit."
+exit 1
+fi
+
+echo "All checks passed. Proceeding with commit."
+exit 0
