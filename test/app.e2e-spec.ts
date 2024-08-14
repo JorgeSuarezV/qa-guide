@@ -5,7 +5,7 @@ import { AppModule } from '../src/app.module';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient({
-  datasourceUrl: 'postgresql://prisma:prisma@localhost:5433/tests',
+  datasourceUrl: 'postgresql://postgres:postgres@localhost:5433/test_db',
 });
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -23,7 +23,7 @@ describe('AppController (e2e)', () => {
     return request(app.getHttpServer())
       .get('/')
       .expect(200)
-      .expect('Hello');
+      .expect('Hello World!');
   });
 
   it('create n users', async () => {
