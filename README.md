@@ -109,3 +109,5 @@ fi
 
 echo "All checks passed. Proceeding with commit."
 exit 0
+
+
